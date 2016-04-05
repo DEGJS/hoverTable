@@ -1,5 +1,5 @@
 # hoverTable
-A Promise-based event utility.
+A plugin for highlighting table cells, columns and rows on hover.
 
 ## Sample Usage
 ``` javascript
