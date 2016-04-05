@@ -1,0 +1,8 @@
+{
+	"name": "hoverTable",
+	"main": "hoverTable.js",
+	"jspm": {
+  		"format": "es6",
+  		"registry": "jspm"
+  	}
+}
