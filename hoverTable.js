@@ -67,10 +67,12 @@ let hoverTable = function(element, options) {
             matchingRowEl.classList.remove(settings.rowClass);
         }
         if (settings.highlightColumn) {
-            for (var i = 0; i < tableRowEls.length; i++) {
-                let rowItems = Array.prototype.slice.call(tableRowEls[i].querySelectorAll('th, td'));
-                if (rowItems[hoveredIndex]) {
-                    rowItems[hoveredIndex].classList.remove(settings.colClass);
+            if (tableRowEls) {
+                for (var i = 0; i < tableRowEls.length; i++) {
+                    let rowItems = Array.prototype.slice.call(tableRowEls[i].querySelectorAll('th, td'));
+                    if (rowItems[hoveredIndex]) {
+                        rowItems[hoveredIndex].classList.remove(settings.colClass);
+                    }
                 }
             }
         }
