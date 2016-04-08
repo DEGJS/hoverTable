@@ -1,3 +1,4 @@
+/* */ 
 let hoverTable = function(element, options) {
         
     let settings,
@@ -49,7 +50,8 @@ let hoverTable = function(element, options) {
                 if (settings.highlightColumn) {
                     hoveredIndex = getElIndex(hoveredEl);
                     for (var i = 0; i < tableRowEls.length; i++) {
-                        let rowItems = Array.prototype.slice.call(tableRowEls[i].querySelectorAll('th, td'));
+                        let rowItemSelectors = settings.headerHoverEnabled ? 'th, td' : 'td',
+                            rowItems = Array.prototype.slice.call(tableRowEls[i].querySelectorAll(rowItemSelectors));
                         if (rowItems[hoveredIndex]) {
                             rowItems[hoveredIndex].classList.add(settings.colClass);
                         }
