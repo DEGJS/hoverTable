@@ -1,9 +1,9 @@
-/* */ 
 let hoverTable = function(element, options) {
         
     let settings,
         tableRowEls,
         hoveredEl,
+        hoverTriggerTags,
         hoveredIndex,
         matchingRowEl,
         matchingColEl,
@@ -20,7 +20,7 @@ let hoverTable = function(element, options) {
 
     function init() {
         settings = Object.assign({}, defaults, options);
-        
+        hoverTriggerTags = settings.headerHoverEnabled ? ['th','td'] : ['td'];
         bindEvents();
     };
 
@@ -30,24 +30,19 @@ let hoverTable = function(element, options) {
     };
 
     function onCellMouseover(e) {
-        hoveredEl = e.target;
-        let tagName = hoveredEl.tagName.toLowerCase(),
-            hoverEls = settings.headerHoverEnabled ? ['a','th','td'] : ['a','td'];
-
-        if ((!hoveredEl.classList.contains(settings.noHoverClass)) && (hoverEls.indexOf(tagName) !== -1)) {
-            if (tagName === 'a') {
-                hoveredEl = hoveredEl.parentNode;
-            }
+        hoveredEl = getParentByTagName(e.target, hoverTriggerTags);
+        if ((hoveredEl !== null) && (!hoveredEl.classList.contains(settings.noHoverClass))) {
             if (settings.highlightElement) {
                 hoveredEl.classList.add(settings.cellClass);
             }
             if ((settings.highlightRow) || (settings.highlightColumn)) {
-                tableRowEls = element.querySelectorAll('tr');
                 if (settings.highlightRow) {
-                    matchingRowEl = getParentByElName(hoveredEl, 'tr');
+                    matchingRowEl = getParentByTagName(hoveredEl, 'tr');
                     matchingRowEl.classList.add(settings.rowClass);
                 }
                 if (settings.highlightColumn) {
+                    let tbodyEl = getParentByTagName(hoveredEl, 'tbody');
+                    tableRowEls = tbodyEl.querySelectorAll('tr');
                     hoveredIndex = getElIndex(hoveredEl);
                     for (var i = 0; i < tableRowEls.length; i++) {
                         let rowItemSelectors = settings.headerHoverEnabled ? 'th, td' : 'td',
@@ -61,7 +56,7 @@ let hoverTable = function(element, options) {
         }
     };
 
-    function onCellMouseout(e) {
+    function onCellMouseout() {
         if ((hoveredEl) && (settings.highlightElement)) {
             hoveredEl.classList.remove(settings.cellClass);
         }
@@ -80,17 +75,18 @@ let hoverTable = function(element, options) {
         }
     };
 
-    function getParentByElName(el, elName) {
-        let parentEl = el.parentNode;
-        if (parentEl === null) {
-            return null;
-        } else {
-            if (parentEl.tagName.toLowerCase() === elName) {
-                return parentEl;
+    function getParentByTagName(el, elNames) {
+        while (el && el.parentNode) {
+            if (elNames.indexOf(el.tagName.toLowerCase()) !== -1) {
+                return el;
             } else {
-                getParentByElName(parentEl, elName)
+                el = el.parentNode;
+                if ((el.tagName) && (elNames.indexOf(el.tagName.toLowerCase()) !== -1)) {
+                    return el;
+                }
             }
         }
+        return null;
     };
 
     function getElIndex(el) {
@@ -104,6 +100,7 @@ let hoverTable = function(element, options) {
     };
 
     function destroy() {
+        onCellMouseout();
         element.removeEventListener('mouseover', onCellMouseover);
         element.removeEventListener('mouseout', onCellMouseout);
     };
