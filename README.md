@@ -1,26 +1,26 @@
-# hoverTable
+# linksToSelect
 A plugin for highlighting table cells, columns and rows on hover.
 
 ## Sample Usage
 ``` javascript
-let hoverTableInst = hoverTable(element, hoverTableOptions);
+let linksToSelectInst = linksToSelect(element, linksToSelectOptions);
 ```
 
 ## Settings
 ``` javascript
-let hoverTableOptions = {
-	headerHoverEnabled: false,
-    highlightElement: true,
-    highlightRow: true,
-    highlightColumn: true,
-    noHoverClass: 'no-hover',
-    cellClass: 'is-hover-cell',
-    rowClass: 'is-hover-row',
-    colClass: 'is-hover-col'
+let linksToSelectOptions = {
+	linkSelector: 'a',
+    linkAttributeSelector: 'href',
+    linkActiveClass: 'is-active',
+    linksWrapperClass: 'lts-link-wrapper',
+    selectClass: 'lts-select',
+    destinationEl: null,
+    onSelectChangeCallback: null
 }
 ```
 
 ## Available Methods
+* create()
 * destroy()
 
 ## Revision History
