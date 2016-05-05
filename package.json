@@ -1,6 +1,6 @@
 {
-	"name": "linksToSelect",
-	"main": "linksToSelect.js",
+	"name": "hoverTable",
+	"main": "hoverTable.js",
 	"jspm": {
   		"format": "es6",
   		"registry": "jspm"
