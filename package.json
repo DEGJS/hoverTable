@@ -1,8 +1,29 @@
 {
-	"name": "hoverTable",
-	"main": "hoverTable.js",
-	"jspm": {
-  		"format": "es6",
-  		"registry": "jspm"
-  	}
+    "name": "hoverTable",
+    "version": "1.0.0",
+    "description": "A plugin for highlighting table cells, columns and rows on hover.",
+    "keywords": [
+    	"table",
+    	"highlighter",
+        "DEGJS"
+    ],
+    "author": {
+        "name": "Aaron Ladage",
+        "email": "aladage@degdigital.com",
+        "url": "http://aaronladage.com"
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DEGJS/hoverTable.git"
+    },
+    "bugs": "https://github.com/DEGJS/hoverTable/issues",
+    "jspm": {
+        "registry": "jspm",
+        "format": "es6",
+        "main": "hoverTable.js",
+        "directories": {
+            "lib": "src"
+        }
+    }
 }
